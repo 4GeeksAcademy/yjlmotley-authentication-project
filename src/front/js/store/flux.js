@@ -17,6 +17,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			logIn: (email, password) => {
+				fetch(process.env.BACKEND_URL + "/api/log_in", {
+					body: json.stringify({
+						email: email,
+						password: password
+					})
+				})
+				.then(response => response.json())
+				.then((data) => {
+					console.log(data)
+				})
+				.catch(error => console.log("There was an error at the log_in fetch", error))
+			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
