@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+
 import "../../styles/index.css";
 
 
@@ -38,7 +40,10 @@ const Private = () => {
             return (
                 <div>
                     <h1>Access Denied</h1>
-                    <p>You're not an authenticated user. Please log in to access the private page.</p>
+                    <p>You're not an authenticated user. Please log in successfully to access the private page.</p>
+                    <Link to="/log_in">
+                        <p>Log In</p>
+                    </Link>
                 </div>
             )    
     }
