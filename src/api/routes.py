@@ -44,10 +44,10 @@ def handleSignup():
     password = request.json.get('password', None)
     if email is None or password is None:
         return jsonify({"msg": "Missing email or password"}), 400
-    if User.query.filter_by(email=email).first() is not None:
+    if User.query.filter_by(email=email).first():
         return jsonify({"msg": "User already exists"}), 400
     hashed_password = generate_password_hash(password)
-    new_user= User(email=email, password=hashed_password)
+    new_user= User(email=email, password=hashed_password, is_active=True)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"msg": "User created successfully"}), 201

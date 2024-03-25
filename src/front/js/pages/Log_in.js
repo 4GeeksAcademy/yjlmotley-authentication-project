@@ -1,17 +1,20 @@
 import React from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 
 const Log_in = () => {
     const { actions } = useContext(Context);
+    const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
         let email = event.target.emailInput.value;
         let password = event.target.passwordInput.value;
-        const response = await actions.logIn(email, password); // Changed 'respose' to 'response'
+        const response = await actions.logIn(email, password);
         if (response) {
             console.log('Login successful');
+            navigate('/private')
         } else {
             console.log('Login failed');
         };
@@ -25,7 +28,6 @@ const Log_in = () => {
                 <input type="password" name="passwordInput" required></input>
                 <button type="submit">Log In</button>
             </form>
-            
         </div>
     )
 }
