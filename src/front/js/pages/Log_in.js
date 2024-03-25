@@ -19,6 +19,8 @@ const Log_in = () => {
             navigate('/private')
         } else {
             console.log('Login failed');
+            // alert("Invalid username or password. Please try again.");
+            navigate('/private')
         };
     };
 
