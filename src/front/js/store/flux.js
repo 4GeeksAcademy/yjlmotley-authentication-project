@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			isAuthenticated: false, 
+			
 			message: null,
 			demo: [
 				{
@@ -63,25 +63,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			checkAuthentication: () => {
-				const token = sessionStorage.getItem('jwt-token')
-				if (token) {
-					setStore ({
-						isAuthenticated: true
-					})
-				} else {
-					setStore ({
-						isAuthenticated: false
-					})
-				}
-			},
 
-			private: async () => {
-				try {
+			goPrivate: async () => {
+				console.log("it's running!")
+				if (sessionStorage.getItem('token')){try {
+					
 					let response = await fetch(process.env.BACKEND_URL + '/api/private', {
-						method: "Get",
+				
 						headers: {
-							Authorization: "Bearer" + sessionStorage.getItem('token')
+							Authorization: "Bearer " + sessionStorage.getItem('token')
 						}
 					})
 					if (!response.ok) {
@@ -89,11 +79,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						let data = await response.json()
 						console.log(data)
-						setStore({isAuthenticated: true})
 						return true
 					}
 				} catch (error) {console.log(error)
-					return false}
+					return false}}
+				
 				
 			}
 		}
