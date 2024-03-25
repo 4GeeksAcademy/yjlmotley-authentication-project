@@ -63,7 +63,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
 			goPrivate: async () => {
 				console.log("it's running!")
 				if (sessionStorage.getItem('token')){try {
@@ -83,8 +82,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				} catch (error) {console.log(error)
 					return false}}
-				
-				
 			}
 		}
 	};

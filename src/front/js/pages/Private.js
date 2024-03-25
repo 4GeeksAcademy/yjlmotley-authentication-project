@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import "../../styles/index.css";
 
 
 const Private = () => {
@@ -41,7 +42,6 @@ const Private = () => {
                 </div>
             )    
     }
-
 };
 
 

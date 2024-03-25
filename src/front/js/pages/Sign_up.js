@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import "../../styles/index.css";
+
 
 const Sign_up = () => {
     const { actions } = useContext(Context);
@@ -18,11 +20,12 @@ const Sign_up = () => {
 
 return (
     <div>
-        <h1> Sign Up </h1>
+        <h1> SIGN UP </h1>
         <form onSubmit={handleSubmit}>
             <input type="email" name="emailInput" placeholder="example@host.com" required />
-            <input type="password" name="passwordInput" required />
-            <button type="submit">Sign-Up</button>
+            <input placeholder="type password here" type="password" name="passwordInput" className="passwordInput" required />
+            <br></br>
+            <button className="submitBtn" type="submit">Sign Up</button>
         </form>
     </div>
 )

@@ -2,6 +2,8 @@ import React from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../../styles/index.css";
 
 
 const Log_in = () => {
@@ -22,11 +24,15 @@ const Log_in = () => {
 
     return (
         <div>
-            <h1>LOG IN PAGE!!</h1>
+            <h1>LOG IN</h1>
             <form onSubmit={handleSubmit}>
                 <input type="email" placeholder="email@host.com" name="emailInput" required></input>
-                <input type="password" name="passwordInput" required></input>
-                <button type="submit">Log In</button>
+                <input type="password" placeholder="type password here" name="passwordInput" className="passwordInput" required></input>
+                <br></br>
+                <button className="submitBtn" type="submit">Log In</button>
+                <Link to="/sign_up">
+                    <p>Click here to Sign Up</p>
+                </Link>
             </form>
         </div>
     )
