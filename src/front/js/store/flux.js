@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			isAuthenticated: false, 
 			message: null,
 			demo: [
 				{
@@ -19,7 +20,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			logIn: (email, password) => {
 				fetch(process.env.BACKEND_URL + "/api/log_in", {
-					body: json.stringify({
+					method: "Post",
+					headers: {
+						'Content-Type':' application/json'
+					},
+
+
+					body: JSON.stringify({
 						email: email,
 						password: password
 					})
@@ -29,6 +36,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data)
 				})
 				.catch(error => console.log("There was an error at the log_in fetch", error))
+			},
+
+			signUp: async (email, password) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + '/api/sign_up', {
+						method: "Post",
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password
+						})
+					});
+					const data = await response.json();
+					console.log(data);
+					return data; 
+				} catch (error) {
+					console.log("There was an error at sign up", error);
+					throw error; 
+				}
+			},
+
+			checkAuthentication: () => {
+				const token = sessionStorage.getItem('jwt-token')
+				if (token) {
+					setStore ({
+						isAuthenticated: true
+					})
+				} else {
+					setStore ({
+						isAuthenticated: false
+					})
+				}
 			},
 
 			exampleFunction: () => {
@@ -64,5 +105,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		}
 	};
 };
+
 
 export default getState;

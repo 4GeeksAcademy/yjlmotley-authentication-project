@@ -8,6 +8,8 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import Log_in from "./pages/Log_in";
+import Private from "./pages/Private";
+import Sign_up from "./pages/Sign_up";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -29,7 +31,9 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<Log_in/>} path="/log_in" />
+                        <Route element={<Log_in />} path="/log_in" />
+                        <Route element={<Private />} path="/private" />
+                        <Route element={<Sign_up />} path="/sign_up" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
@@ -38,5 +42,6 @@ const Layout = () => {
         </div>
     );
 };
+
 
 export default injectContext(Layout);
