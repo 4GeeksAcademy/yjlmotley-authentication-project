@@ -1,14 +1,14 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/index.css";
 
 
-const Log_in = () => {
+const Log_in = ({ onLogin }) => {
     const { actions } = useContext(Context);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         let email = event.target.emailInput.value;
@@ -16,6 +16,7 @@ const Log_in = () => {
         const response = await actions.logIn(email, password);
         if (response) {
             console.log('Login successful');
+            onLogin(true);
             navigate('/private')
         } else {
             console.log('Login failed');
