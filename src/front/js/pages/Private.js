@@ -1,25 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-
 import "../../styles/index.css";
 
 
 const Private = () => {
-    const { store, actions } = useContext(Context)
-    const [isAuthenticated, setIsAunthenticated]= useState("pending")
+    const { actions } = useContext(Context)
+    const [isAuthenticated, setIsAuthenticated]= useState("pending")
 
     useEffect(()=>{
-        let authenticate = async ()=>{
-            let result = await actions.goPrivate()
-            if (result){
-                setIsAunthenticated("yes")
-            }else{
-                setIsAunthenticated("no")
+        let authenticate = async () => {
+            try {
+                const result = await actions.goPrivate();
+                setIsAuthenticated(result ? "yes" : "no");
+            } catch (error) {
+                console.error("Error occurred during authentication:", error);
+                setIsAuthenticated("no");
             }
-        }
-       authenticate()
-    },[])
+        };
+
+        authenticate();
+    }, [actions]);
+    
 
     switch(isAuthenticated) {
         case "pending": 

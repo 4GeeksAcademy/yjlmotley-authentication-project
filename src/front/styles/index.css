@@ -4,6 +4,7 @@ h1 {
 p {
     text-align: center;
 }
+
 form {
     text-align: center;
 }
@@ -16,6 +17,7 @@ form {
 .submitBtn {
     margin-top: 10px;
 }
+
 footer {
     position: absolute;
     bottom: 0;

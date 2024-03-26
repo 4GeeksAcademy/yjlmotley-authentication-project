@@ -19,27 +19,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			logIn: async (email, password) => {
-				try {let response = await fetch(process.env.BACKEND_URL + "/api/log_in", {
-					method: "Post",
-					headers: {
-						'Content-Type':' application/json'
-					},
-
-
-					body: JSON.stringify({
-						email: email,
-						password: password
-					})
-				})
-				if (!response.ok) {
-					return false
-				} else {
-					let data = await response.json()
-					sessionStorage.setItem('token', data.token)
-					return true
-				}}
-				catch(error){console.log("There was an error at the log_in fetch", error)
-					return false}
+				try {
+					let response = await fetch(process.env.BACKEND_URL + "/api/log_in", {
+						method: "POST",
+						headers: {
+							'Content-Type':' application/json'
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password
+						})
+					});
+					
+					if (response.status === 200) {
+						let data = await response.json();
+						sessionStorage.setItem('token', data.token);
+						return true; // Login successful
+					} else if (response.status === 401) {
+						return false; // Unauthorized (login failed)
+					} else {
+						console.log("Unexpected error occurred during login:", response.status);
+						return false;
+					}
+				} catch (error) {
+					console.log("There was an error during login:", error);
+					return false;
+				}
 			},
 
 			signUp: async (email, password) => {
