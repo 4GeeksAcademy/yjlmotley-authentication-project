@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import "../../styles/index.css";
 
 
-const Log_in = ({ onLogin }) => {
+const Log_in = () => {
     const { actions } = useContext(Context);
-    const navigate = useNavigate();
-
+    const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
         let email = event.target.emailInput.value;
@@ -16,7 +15,6 @@ const Log_in = ({ onLogin }) => {
         const response = await actions.logIn(email, password);
         if (response) {
             console.log('Login successful');
-            onLogin(true);
             navigate('/private')
         } else {
             console.log('Login failed');

@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 export const Navbar = () => {
-	const [isLoggedIn, setLoggedIn] = useState(false);
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
 		sessionStorage.removeItem('token');
 		console.log('Token removed from sessionStorage')
-		setLoggedIn(false);
 		navigate('/');
 	};
 
@@ -20,13 +18,10 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Home</span>
 				</Link>
 				<div className="ml-auto">
-					{isLoggedIn ? (
-						<button className="btn btn-primary" onClick={handleLogout}>Logout</button>
-					) : (
-						<Link to="/log_in">
-							<button className="btn btn-primary">Log In</button>
-						</Link>
-					)}
+					<Link to="/log_in">
+						<button className="btn btn-primary">Log In</button>
+					</Link>
+					<button className="btn btn-primary" onClick={handleLogout}>Logout</button>
 				</div>
 			</div>
 		</nav>
